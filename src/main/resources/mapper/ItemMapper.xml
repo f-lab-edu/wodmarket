@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flab.wodmarket.domain.item.ItemMapper">
+<resultMap id="Item" type="com.flab.wodmarket.domain.item.Item">
+    <id property="itemNo" column="item_no"/>
+    <result property="categoryNo" column="category_no"/>
+    <result property="saleRate" column="sale_rate"/>
+    <result property="saleStartDate" column="sale_start_date"/>
+    <result property="saleEndDate" column="sale_end_date"/>
+    <result property="regDate" column="reg_date"/>
+    <result property="modDate" column="mod_date"/>
+</resultMap>
+
+
+    <select id="allItem" resultMap="Item">
+        SELECT
+            item.item_no AS itemNo,
+            item.name AS name,
+            item.price AS price,
+            item.sale AS sale,
+            item.stock AS stock,
+            item.sale_rate AS saleRate,
+            item.sale_start_date AS saleStartDate,
+            item.sale_end_date AS saleEndDate,
+            item.status AS status,
+            cate.category_Name AS categoryName
+        FROM item item
+            JOIN category cate on item.category_no = cate.category_no
+        WHERE
+            item.status = 'sale'
+        ORDER BY item.item_no DESC
+
+    </select>
+
+
+    <select id="getListOne" resultMap="Item">
+        SELECT DISTINCT
+            item.item_no AS itemNo,
+            item.name AS name,
+            item.price AS price,
+            item.sale AS sale,
+            item.stock AS stock,
+            item.sale_rate AS saleRate,
+            item.sale_start_date AS saleStartDate,
+            item.sale_end_date AS saleEndDate,
+            item.status AS status,
+            cate.category_Name AS categoryName
+        FROM item item
+            JOIN category cate on item.category_no = cate.category_no
+        WHERE item.item_no = #{itemNo}
+        AND item.status = 'sale'
+    </select>
+
+<!--
+
+    <insert id="saveItem" parameterType="Item">
+        INSERT INTO item
+        (
+            category_no ,
+            admin_no ,
+            name ,
+            price ,
+            stock ,
+            sale_rate ,
+            sale_start_date ,
+            sale_end_date ,
+            status ,
+            detail
+        ) VALUES (
+            #{categoryNo},
+            #{adminNo},
+            #{name},
+            #{price},
+            #{stock},
+            #{saleRate},
+            #{saleStartDate},
+            #{saleEndDate},
+            #{status},
+            #{detail}
+        )
+    </insert>
+-->
+
+
+</mapper>
