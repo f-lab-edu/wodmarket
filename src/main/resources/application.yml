@@ -1,0 +1,5 @@
+# application.yml
+spring:
+  application:
+    name: wodMarket
+
