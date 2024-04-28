@@ -2,4 +2,5 @@
 spring:
   application:
     name: wodMarket
-
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml

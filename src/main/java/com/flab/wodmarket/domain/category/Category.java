@@ -10,6 +10,7 @@ public class Category {
 
         private Long categoryNo;
         private String categoryName;
+
         @Builder
         public Category(Long categoryNo, String categoryName) {
             this.categoryNo = categoryNo;
@@ -17,4 +18,7 @@ public class Category {
         }
 
 
+    public void addCategory(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
