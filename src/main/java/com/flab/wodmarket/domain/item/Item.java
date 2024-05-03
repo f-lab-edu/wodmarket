@@ -1,10 +1,9 @@
 package com.flab.wodmarket.domain.item;
 
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -15,23 +14,24 @@ public class Item {
     private Long sale;
     private int stock;
     private int saleRate;
-    private ItemStatus status;
-    private LocalDateTime saleStartDate;
-    private LocalDateTime saleEndDate;
-    private String detail;
+    private ItemStatus itemStatus;
+    private LocalDateTime saleStartDateTime;
+    private LocalDateTime saleEndDateTime;
+    private String itemInfo;
 
     @Builder
-    public Item(Long itemNo, String name, Long price, Long sale, int stock, int saleRate, ItemStatus status, LocalDateTime saleStartDate, LocalDateTime saleEndDate, String detail) {
+    public Item(Long itemNo, String name, Long price, Long sale, int stock, int saleRate, ItemStatus itemStatus,
+                LocalDateTime saleStartDateTime, LocalDateTime saleEndDateTime, String itemInfo) {
         this.itemNo = itemNo;
         this.name = name;
         this.price = price;
         this.sale = sale;
         this.stock = stock;
         this.saleRate = saleRate;
-        this.status = status;
-        this.saleStartDate = saleStartDate;
-        this.saleEndDate = saleEndDate;
-        this.detail = detail;
+        this.itemStatus = itemStatus;
+        this.saleStartDateTime = saleStartDateTime;
+        this.saleEndDateTime = saleEndDateTime;
+        this.itemInfo = itemInfo;
     }
 }
 

@@ -1,15 +1,18 @@
 package com.flab.wodmarket.domain.item;
 
 import com.flab.wodmarket.domain.item.dto.ItemDto;
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
+import java.util.Map;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ItemMapper {
-    List<Item> allItem();
-    ItemDto getListOne(Long itemNo);
+    List<Map<String, Object>> findAll(Map<String, Object> paramMap);
 
-    // void addItem(ItemDto itemDto);
+    int countItem();
+
+    ItemDto findById(Long itemNo);
+
+    void addItem(ItemDto itemDto);
 
 }

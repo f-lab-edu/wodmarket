@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flab.wodmarket.domain.category.CategoryMapper">
-<resultMap id="Category" type="com.flab.wodmarket.domain.category.Category">
-    <id property="categoryNo" column="category_no"/>
-    <result property="categoryName" column="category_name"/>
-</resultMap>
+    <resultMap id="Category" type="com.flab.wodmarket.domain.category.Category">
+        <id property="no" column="category_no"/>
+        <result property="name" column="category_name"/>
+    </resultMap>
 
-    <select id="findAll" resultType="String">
-        SELECT category.category_name as categoryName
-        FROM category category
-        ORDER BY category.category_no ASC
+    <select id="allList" resultMap="Category">
+        SELECT category_no as no,
+                category_name as name
+        FROM category
+        ORDER BY category_no ASC
     </select>
 
     <insert id="addCategory" parameterType="String">
         INSERT INTO category
-            (
-                category_name
-            ) VALUES (
-                #{categoryName}
-            )
+            (category_name)
+        VALUES (#{categoryName})
     </insert>
 
     <select id="findById" parameterType="int" resultMap="Category">
-        SELECT category.category_name as categoryName,
-            category.category_no as categoryNo
-        FROM category category
-        where category.category_no = #{categoryNo}
+        SELECT category_no as no,
+                category_name as name
+        FROM category
+        WHERE category_no = #{categoryNo}
     </select>
 
-    <!--
-       <delete id="deleteById" parameterType="int">
-           DELETE
-           FROM category
-           WHERE categoryNo = #{categoryNo}
-       </delete>
-   -->
+    <delete id="deleteCategory" parameterType="int">
+        DELETE
+        FROM category
+        WHERE category_no = #{categoryNo}
+    </delete>
 
 </mapper>

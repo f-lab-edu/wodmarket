@@ -8,13 +8,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Category {
 
-        private Long categoryNo;
-        private String categoryName;
-        @Builder
-        public Category(Long categoryNo, String categoryName) {
-            this.categoryNo = categoryNo;
-            this.categoryName = categoryName;
-        }
+    private Long no;
+    private String name;
+
+    @Builder
+    public Category(String name, int no) {
+        this.no = this.no;
+        this.name = name;
+    }
 
 
+    public void addCategory(String name) {
+        this.name = name;
+    }
 }

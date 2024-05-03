@@ -1,10 +1,11 @@
 package com.flab.wodmarket.domain.category;
 
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -12,21 +13,26 @@ import java.util.List;
 public class CategoryService {
     private final CategoryMapper categoryMapper;
 
-    public List<String> allCategory() {
-        return categoryMapper.allCategory();
+    public List<Category> allCategory() {
+        return categoryMapper.allList();
     }
 
-    public Category findById(int categoryNo) {
-        return categoryMapper.findById(categoryNo);
+    public Category findById(int no) {
+        return categoryMapper.findById(no);
     }
 
 
-    public void addCategory(String categoryName, int categoryNo) {
-        Category existCategory = findById(categoryNo);
-        if(existCategory == null)
-            categoryMapper.addCategory(categoryName);
-        else
+    public void addCategory(int no, String name) {
+        Optional<Category> existCategory = Optional.ofNullable(findById(no));
+        if (existCategory.isPresent()) {
+            log.info("log={}", existCategory);
             throw new IllegalArgumentException("이미 존재하는 카테고리입니다.");
+        }
+        categoryMapper.addCategory(no, name);
+    }
 
+    public void delete(int no) {
+        findById(no);
+        categoryMapper.deleteCategory(no);
     }
 }
