@@ -1,12 +1,10 @@
 package com.flab.wodmarket.domain.item;
 
 import com.flab.wodmarket.domain.item.dto.ItemDto;
-import java.util.HashMap;
-import java.util.Map;
+import com.flab.wodmarket.domain.item.dto.response.ItemResponseDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,17 +26,13 @@ public class ItemController {
 
     @ResponseBody
     @GetMapping("/all")
-    public ResponseEntity<Object> findAll(@RequestParam Map<String, Object> paramMap,
-                                          @PageableDefault(value = 10) Pageable page) {
-        Map<String, Object> response = new HashMap<>();
-        Page<Map<String, Object>> result = itemService.findAll(paramMap, page);
-        response.put("pages", result);
-        response.put("size", page.getPageSize());
+    public ResponseEntity<Object> findAll(@PageableDefault(value = 10) Pageable page) {
+        ItemResponseDTO response = itemService.findAll(page);
         return ResponseEntity.ok().body(response);
     }
 
 
-    @GetMapping("{itemNo}")
+    @GetMapping("/{itemNo}")
     public ItemDto findById(@PathVariable Long itemNo) {
         return itemService.findById(itemNo);
     }

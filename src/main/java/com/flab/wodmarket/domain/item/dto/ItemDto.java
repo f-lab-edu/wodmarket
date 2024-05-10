@@ -25,8 +25,8 @@ public class ItemDto {
     private String itemInfo;
 
     @Builder
-    public ItemDto(Long itemNo, String name, Long price, Long sale, int stock, int saleRate, ItemStatus itemStatus,
-                   LocalDateTime saleStartDateTime, LocalDateTime saleEndDateTime, String itemInfo) {
+    ItemDto(Long itemNo, String name, Long price, Long sale, int stock, int saleRate, ItemStatus itemStatus,
+            LocalDateTime saleStartDateTime, LocalDateTime saleEndDateTime, String itemInfo) {
         this.itemNo = itemNo;
         this.name = name;
         this.price = price;

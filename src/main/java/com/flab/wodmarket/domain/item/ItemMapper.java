@@ -1,13 +1,13 @@
 package com.flab.wodmarket.domain.item;
 
 import com.flab.wodmarket.domain.item.dto.ItemDto;
-import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Mapper
 public interface ItemMapper {
-    List<Map<String, Object>> findAll(Map<String, Object> paramMap);
+    Page<Item> findAll(Pageable paramMap);
 
     int countItem();
 

@@ -32,7 +32,11 @@ public class CategoryService {
     }
 
     public void delete(int no) {
-        findById(no);
-        categoryMapper.deleteCategory(no);
+        Optional<Category> existCategory = Optional.ofNullable(findById(no));
+        if (existCategory.isPresent()) {
+            categoryMapper.deleteCategory(no);
+        } else {
+            throw new IllegalArgumentException("존재하지 않는 카테고리입니다.");
+        }
     }
 }

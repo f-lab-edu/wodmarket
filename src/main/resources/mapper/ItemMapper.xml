@@ -27,7 +27,7 @@
                img.seq              AS imgSeq
         FROM item item
                  JOIN category cate on item.category_no = cate.category_no
-                 INNER JOIN itemimg img ON item.item_no = img.item_no
+                 INNER JOIN itemImg img ON item.item_no = img.item_no
         WHERE item.status = 'sale'
         ORDER BY item.item_no DESC
         LIMIT ${offset} , ${size}
